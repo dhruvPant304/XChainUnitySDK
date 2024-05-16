@@ -10,9 +10,7 @@
         "url": "https://techalchemy.com/" 
     },
     "dependencies": {
-        "com.cysharp.unitask": "2.5.4",
         "com.unity.textmeshpro": "3.0.6",
-        "com.unity.nuget.newtonsoft-json": "3.2.1",
-        "com.github.siccity.xnode": "1.8.0"
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
     }
 }
