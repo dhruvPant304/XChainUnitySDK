@@ -1,0 +1,20 @@
+{
+    "name": "XChain",
+    "rootNamespace": "",
+    "references": [
+        "UniTask",
+        "XNodeStateMachine'",
+        "XNode",
+        "Unity.TextMeshPro",
+        "unity-webview"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
