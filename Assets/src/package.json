@@ -10,10 +10,9 @@
         "url": "https://techalchemy.com/" 
     },
     "dependencies": {
-        "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-        "net.gree.unity-webview": "https://github.com/gree/unity-webview.git?path=/dist/package-nofragment",
+        "com.cysharp.unitask": "2.5.4",
         "com.unity.textmeshpro": "3.0.6",
         "com.unity.nuget.newtonsoft-json": "3.2.1",
-        "com.github.siccity.xnode": "https://github.com/siccity/xNode.git"
+        "com.github.siccity.xnode": "1.8.0"
     }
 }
