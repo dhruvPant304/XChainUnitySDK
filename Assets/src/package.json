@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description" : "Let's you connect your Unity game to XChain",
     "displayName": "XChain SDK",
-    "unity" : "2021.3.16f1",
+    "unity" : "2021.3",
     "author" : {
         "name" : "Dhruv Pant",
         "email": "dhruv@techalchemy.com",
