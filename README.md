@@ -16,14 +16,30 @@ Checkout the offical document [XChain Official Documentaion](/) to get started
 
 ## 💾 Installation
 
+### Installing dependencies
+
 Before installing XChain Unity SDK Package make sure you have installed the following packages in your Unity project, ignore any packages thar are already installed
 all these packages can be installed from Unity Package Manager window (**Windows > Package Manager**) using **"Add package from git URL"** option
 
-- **UniTask**: Use ` https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask ` to install UniTask
-- **Gree WebView**: Use ` https://github.com/gree/unity-webview.git?path=/dist/package-nofragment ` to install Gree webView
-- **XNode**: Use ` https://github.com/siccity/xNode.git ` to install XNode 
+- **UniTask**: Use  following git URL to install UniTask
 
+    ```
+    https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask 
+    ```
+
+- **Gree WebView**: Use following git URL to install Gree webView
+
+    ```
+     https://github.com/gree/unity-webview.git?path=/dist/package-nofragment 
+    ```
+- **XNode**: Use following git URL to install XNode 
+    
+    ```
+    https://github.com/siccity/xNode.git 
+    ```
 ### Installing XChain SDK
 After installing all the dependencies you should be good to install the actual XChain SDK package. in **"Add package from git URL"** option use the URL below to install XChain SDK
 
-**XChain SDK URL:** ` https://github.com/dhruvPant304/XChainUnitySDK.git?path=Assets/src `
+``` 
+https://github.com/dhruvPant304/XChainUnitySDK.git?path=Assets/src 
+```
