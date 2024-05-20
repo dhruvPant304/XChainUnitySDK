@@ -15,7 +15,9 @@ namespace Core.API
         public UniTask<RequestResponse<StartLoginRequestResponse, FailedResponse>> StartLogin();
         public UniTask<RequestResponse<CheckLoginRequestResponse, FailedResponse>> CheckLogin(string sessionId);
         public UniTask<RequestResponse<UserDetailsSucessResponse, FailedResponse>> GetUserDetails(string token);
-        public UniTask<RequestResponse<OwnedNFTSuccessResponse[], FailedResponse>> GetOwnedNFTDetails(string authToken);
+        public UniTask<RequestResponse<GetNFTSuccessResponse[], FailedResponse>> GetOwnedNFTDetails(string gameId, string authToken);
+        public UniTask<RequestResponse<GetNFTSuccessResponse[], FailedResponse>> GetAllNFTDetails(string gameId, string collectionId, int perPageAmount, int page);
+        public UniTask<RequestResponse<BuyNFTRequestResponse, FailedResponse>> BuyNFT(BuyNFTRequestParams buyParams, string nftId, string token);
         public UniTask<RequestResponse<ExchangeNetwork[], FailedResponse>> GetExchangeNetworks();
         public UniTask<RequestResponse<Dictionary<string, ExchangePriceResponse>, FailedResponse>> GetPrice(int chainId);
         public UniTask<RequestResponse<float, FailedResponse>> GetXTokenPriceInUSDT(int chainId);
