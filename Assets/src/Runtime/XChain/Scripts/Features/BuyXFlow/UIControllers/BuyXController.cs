@@ -29,9 +29,12 @@ namespace Features.BuyXFlow.UIControllers
         private List<Currencies> currencies = new List<Currencies>();
         private Dictionary<string, ExchangePriceResponse> currencyRates = new Dictionary<string, ExchangePriceResponse>();
 
-        private int _chainId;
+
         [SerializeField] string _accessToken;
+        [SerializeField] int _nftQuantity;
         private string _accessKey = "283c238b82d0cfba454f9b01a7c205bd";
+
+        private int _chainId;
         private string _symbol;
         private string _tokenUUID;
         private float _xTokenAmount;
@@ -251,12 +254,47 @@ namespace Features.BuyXFlow.UIControllers
         }
 
         private async UniTask GetNFTDetails() {
-            var response = await XChain.Instance.APIService.GetOwnedNFTDetails(_accessToken);
+            var response = await XChain.Instance.APIService.GetOwnedNFTDetails(XChain.Instance.AppConfig.gameSettings.gameID, _accessToken);
             if (response.IsSuccess) {
                 Debug.Log(response.SuccessResponse);
             }
             else {
-                Debug.Log($"Get User Details Failed: {response.FailureResponse.message}");
+                Debug.Log($"Get User NFT Details Failed: {response.FailureResponse.message}");
+            }
+        }
+
+        public void GetAllNFTDetails() {
+            GetAllNFTsDetails();
+        }
+
+        private async UniTask GetAllNFTsDetails() {
+            string _collectionId = ""; //add collection id here to filter nft details with collection
+            int _perPageAmount = 10;
+            int _page = 1;
+            var response = await XChain.Instance.APIService.GetAllNFTDetails(XChain.Instance.AppConfig.gameSettings.gameID, _collectionId, _perPageAmount,_page);
+            if (response.IsSuccess) {
+                Debug.Log(response.SuccessResponse);
+            }
+            else {
+                Debug.Log($"Get All NFT Details Failed: {response.FailureResponse.message}");
+            }
+        }
+
+        public void BuyNFT() {
+            BuyUserNFT();
+        }
+
+        private async UniTask BuyUserNFT() {
+            string _nftId = ""; //add nftId here to purchase
+            var buyParams = new BuyNFTRequestParams() {
+                quantity = _nftQuantity
+            };
+            var response = await XChain.Instance.APIService.BuyNFT(buyParams, _nftId, _accessToken);
+            if (response.IsSuccess) {
+                Debug.Log(response.SuccessResponse);
+            }
+            else {
+                Debug.Log($"Purchase Failed: {response.FailureResponse.message}");
             }
         }
 

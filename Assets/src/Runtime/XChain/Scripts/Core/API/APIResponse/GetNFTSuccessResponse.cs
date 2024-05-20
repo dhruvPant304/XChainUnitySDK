@@ -3,7 +3,7 @@ using Types;
 
 namespace Core.API.APIResponse {
     [Serializable]
-    public class OwnedNFTSuccessResponse {
+    public class GetNFTSuccessResponse {
         public string id;
         public string createdBy;
         public string createdById;

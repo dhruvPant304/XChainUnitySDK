@@ -1,1 +1,1 @@
-{"networkSettings":{"serverUrl":"","xChainAuthUrl":"","debugSettings":{"logResponses":false,"logParams":false}},"gameSettings":{"gameID":""}}
+{"networkSettings":{"serverUrl":"http://13.43.201.136:3001","xChainAuthUrl":"http://13.43.201.136:3002","debugSettings":{"logResponses":true,"logParams":true}},"gameSettings":{"gameID":""}}

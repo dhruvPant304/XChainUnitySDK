@@ -69,9 +69,19 @@ namespace Core.API
             return await SendWebRequest<UserDetailsSucessResponse, FailedResponse>(url, "GET", null, token, token);
         }
 
-        public async UniTask<RequestResponse<OwnedNFTSuccessResponse[], FailedResponse>> GetOwnedNFTDetails(string authToken) {
+        public async UniTask<RequestResponse<GetNFTSuccessResponse[], FailedResponse>> GetOwnedNFTDetails(string gameId, string authToken) {
             var url = ServerUrl + $"/api/game-api/v1/nft/ownedNfts";
-            return await SendWebRequest<OwnedNFTSuccessResponse[], FailedResponse>(url, "GET", null, authToken);
+            return await SendWebRequest<GetNFTSuccessResponse[], FailedResponse>(url, "GET", null, authToken);
+        }
+
+        public async UniTask<RequestResponse<GetNFTSuccessResponse[], FailedResponse>> GetAllNFTDetails(string gameId, string collectionId, int perPageAmount, int page) {
+            var url = ServerUrl + $"/api/game-api/v1/nft?perPage={perPageAmount}&page={page}";
+            return await SendWebRequest<GetNFTSuccessResponse[], FailedResponse>(url, "GET");
+        }
+
+        public async UniTask<RequestResponse<BuyNFTRequestResponse, FailedResponse>> BuyNFT(BuyNFTRequestParams buyParams,string nftId, string token) {
+            var url = ServerUrl + $"/api/game-api/v1/nft/{nftId}/buy";
+            return await SendWebRequest<BuyNFTRequestResponse, FailedResponse>(url, "POST", buyParams, token);
         }
 
         public async UniTask<RequestResponse<ExchangeNetwork[], FailedResponse>> GetExchangeNetworks()
