@@ -6660,6 +6660,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7346910309679566964, guid: 70ec98c063708e94984f0b28ff8c4321, type: 3}
+      propertyPath: accessToken
+      value: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMmY5ZmYzOC1hMjE1LTQxZjEtODExZi01M2U3YmNiNjY1NDciLCJpYXQiOjE3MTYyODMyMDgsImV4cCI6MTcxNjM2OTYwOH0.lBteQiVrobdLHG0_t48kQzXuObC291xxa_KmLuMDnAVLuVOHRy5ofjOD3S_1HOGfxPpSfdi-VLCgEQLAAewA4khJIcQG6iryHhp-yjo8Xmzanm107kzl7rJBZTxLcIPPw-M4kZHIrWmOSbgii3AtDWYNFGZxWxZXIKU8HYLOTxmQmB08RW9_oPO0qCpGafSqVdOWmZ_WEHPP_bs95ZVzOaZxsH2u541hElHwfT-BHExfnvaUTHBellaIH_YbAH5vHR_7ouCCM6ubwhPZoSHjMCcR2oG0ZjjzQ9911wU6f-50bJGPxoo3OOXu9bWrb8PD8fk22kVh5VftxnOkZjjr7Q
+      objectReference: {fileID: 0}
     - target: {fileID: 7346910309679566967, guid: 70ec98c063708e94984f0b28ff8c4321, type: 3}
       propertyPath: m_Name
       value: XTokenPage
