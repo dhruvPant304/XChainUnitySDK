@@ -1,3 +1,4 @@
+using Core.UI;
 using Cysharp.Threading.Tasks;
 using Features.BuyXFlow.UIControllers;
 using Features.Communication.Singletons;
@@ -17,9 +18,9 @@ namespace Features.BuyXFlow.States
         [Output] public NodePort success;
         [Output] public NodePort failed;
 
-        protected override void Enter()
+        protected override async void Enter()
         {
-            SendRequestAsync();
+            await SendRequestAsync();
         }
 
         private async UniTask SendRequestAsync() {

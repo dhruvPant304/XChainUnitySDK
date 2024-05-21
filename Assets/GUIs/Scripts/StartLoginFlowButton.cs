@@ -36,7 +36,7 @@ public class StartLoginFlowButton : MonoBehaviour {
     public void StartLogin() {
         XChain.StartAndWaitLoginCompletion();
         XChain.OnEvent(XChainEvents.LoginSuccess, (context) => {
-            privateKeyText.text = ("Access Key: " + context.Web3Context.PrivateKey);
+            privateKeyText.text = ("Access Key: " + context.Web3Context.AccessKey);
             loginBtn.gameObject.SetActive(false);
             logoutBtn.gameObject.SetActive(true);
             buyXTokenBtn.gameObject.SetActive(true);

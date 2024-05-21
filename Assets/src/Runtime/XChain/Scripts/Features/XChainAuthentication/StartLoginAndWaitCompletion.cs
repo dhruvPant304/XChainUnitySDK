@@ -28,7 +28,7 @@ namespace Features.XChainAuthentication.States {
                 var jsonObject = JsonUtility.FromJson<EventData>(msg);
                 Debug.Log($"{jsonObject.eventData.accessToken} {jsonObject.eventData.accessKey}");
                 XChain.Instance.Context.SessionContext.AccessToken = jsonObject.eventData.accessToken;
-                XChain.Instance.Context.Web3Context.PrivateKey = jsonObject.eventData.accessKey;
+                XChain.Instance.Context.Web3Context.AccessKey = jsonObject.eventData.accessKey;
                 webView.EvaluateJS($"localStorage.removeItem('{keyName}')");
                 ExitThroughNodePort("success");
             });

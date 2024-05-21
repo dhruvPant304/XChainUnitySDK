@@ -11,12 +11,13 @@ using Features.Communication.Types;
 using RiskyTools.Messaging;
 using RiskyTools.Messaging.Interfaces;
 using RiskyTools.Messaging.Services;
+using UnityEditor.Build;
 using UnityEngine;
 using XNodeStateMachine;
 
 namespace Features.Communication.Singletons
 {
-    public class XChain : MonoBehaviour
+    public class XChain : Singleton<XChain>
     {
         private AppConfig _appConfig;
         private readonly IMessagingService _messagingService = new MessagingService();
@@ -25,34 +26,7 @@ namespace Features.Communication.Singletons
         public IMessagingService MessagingService => _messagingService;
         public AppConfig AppConfig => _appConfig;
         
-        private static XChain _instance;
-        public static XChain Instance
-        {
-            get
-            {
-                if (_instance == null) _instance = new GameObject("XChain").AddComponent<XChain>();
-                return _instance;
-            }
-        }
-
-        private void Awake()
-        {
-            if (_instance != null && _instance != this)
-            {
-                Debug.LogWarning("XChain Instance already Exist in scene");
-                Destroy(gameObject);
-                return;
-            }
-            else
-            {
-                _instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            Init();
-        }
-        
-        private void Init()
-        {
+        protected override void Init(){
             _appConfig = AppConfig.LoadData();
             _apiService = new APIService(_appConfig.networkSettings);
             _messagingService.Subscribe<XChainEventMessage>(OnXChainMessageEventReceived, SubscriptionType.Permanent);
