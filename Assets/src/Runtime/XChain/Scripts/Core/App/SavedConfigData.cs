@@ -22,15 +22,13 @@ namespace Core.App
             File.WriteAllText(FilePath,json);
         }
 
-        public static T LoadData()
-        {
-            try
-            {
-                var json = File.ReadAllText(FilePath);
+        public static T LoadData(){
+            try{
+                var fileName = $"{SavedName}.json";
+                var json = Resources.Load<TextAsset>(fileName).text;
                 return JsonUtility.FromJson<T>(json);
             }
-            catch
-            {
+            catch{
                 return new T();
             }
         }
