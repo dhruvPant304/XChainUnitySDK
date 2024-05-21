@@ -1,14 +1,12 @@
 {
-    "name": "XChain.Editor",
+    "name": "XNodeStateMachine.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:fb1ba7bf12136554782cc1ea78f5061c",
+        "GUID:002c1bbed08fa44d282ef34fd5edb138",
         "GUID:b8e24fd1eb19b4226afebb2810e3c19b",
         "GUID:382112638be2b124abaef95d3448ba2a"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

@@ -3,10 +3,10 @@
     "rootNamespace": "",
     "references": [
         "UniTask",
-        "XNodeStateMachine'",
         "XNode",
         "Unity.TextMeshPro",
-        "unity-webview"
+        "unity-webview",
+        "XNodeStateMachine"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
