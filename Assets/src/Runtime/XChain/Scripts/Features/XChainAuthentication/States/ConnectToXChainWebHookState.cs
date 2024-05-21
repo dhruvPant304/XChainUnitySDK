@@ -72,7 +72,7 @@ namespace Features.XChainAuthentication.States
                     var loginResponse = JsonConvert.DeserializeObject<LoginSuccessResponse>(data_text);
                     XChain.Instance.Context.SessionContext.AccessToken = loginResponse.accessToken;
                     XChain.Instance.Context.Web3Context.WalletAddress = loginResponse.user.walletAddress;
-                    XChain.Instance.Context.Web3Context.PrivateKey = loginResponse.privateKey;
+                    XChain.Instance.Context.Web3Context.AccessKey = loginResponse.privateKey;
                     
                     context.Response.StatusCode = 200;
                     string httpResponse = "{}";

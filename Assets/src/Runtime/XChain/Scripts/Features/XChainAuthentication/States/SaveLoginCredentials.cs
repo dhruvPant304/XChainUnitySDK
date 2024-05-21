@@ -11,7 +11,7 @@ namespace Features.XChainAuthentication.States {
             var loginCredentials = new EventData();
             loginCredentials.eventData = new EventDataData();
             loginCredentials.eventData.accessToken = XChain.Instance.GetContext().SessionContext.AccessToken;
-            loginCredentials.eventData.accessKey = XChain.Instance.GetContext().Web3Context.PrivateKey;
+            loginCredentials.eventData.accessKey = XChain.Instance.GetContext().Web3Context.AccessKey;
             var loginCredJson = JsonUtility.ToJson(loginCredentials);
             Debug.Log("cred: " + loginCredJson);
             PlayerPrefs.SetString("loginCredentials", loginCredJson.ToString());

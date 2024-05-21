@@ -5,13 +5,11 @@ using Cysharp.Threading.Tasks;
 using Features.Communication.Enums;
 using Features.Communication.Singletons;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Types;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Features.BuyXFlow.UIControllers
 {
@@ -30,9 +28,8 @@ namespace Features.BuyXFlow.UIControllers
         private Dictionary<string, ExchangePriceResponse> currencyRates = new Dictionary<string, ExchangePriceResponse>();
 
 
-        [SerializeField] string _accessToken;
-        [SerializeField] int _nftQuantity;
-        private string _accessKey = "283c238b82d0cfba454f9b01a7c205bd";
+        [SerializeField] string accessToken;
+        [SerializeField] string accessKey = "283c238b82d0cfba454f9b01a7c205bd";
 
         private int _chainId;
         private string _symbol;
@@ -41,7 +38,24 @@ namespace Features.BuyXFlow.UIControllers
         private float _xTokenConversionRate;
         private string _exchangeRateInEth;
         private string _exchangeRateInUSDT = "200000000";
-        
+
+        private string _accessToken {
+            get {
+                #if UNITY_EDITOR
+                return accessToken;
+                #endif
+                return XChain.Instance.Context.SessionContext.AccessToken;
+            }
+        }
+
+        private string _accessKey {
+            get {
+                #if UNITY_EDITOR
+                return accessKey;
+                #endif
+                return XChain.Instance.Context.Web3Context.AccessKey;
+            }
+        }
 
         private void Start()
         {
@@ -65,28 +79,16 @@ namespace Features.BuyXFlow.UIControllers
             currencyInputField.onValueChanged.AddListener(OnCurrencyValueChanged);
         }
 
-        private void OnXTokenValueChanged(string newValue)
-        {
-            if (!string.IsNullOrEmpty(newValue))
-            {
-                float xTokenValue = 0;
-                if (float.TryParse(newValue, out xTokenValue))
-                {
-                    CalculateCurrency(xTokenValue);
-                }
-            }
+        private void OnXTokenValueChanged(string newValue) {
+            if (string.IsNullOrEmpty(newValue)) return;    
+            if (!float.TryParse(newValue, out float xTokenValue)) return;
+            CalculateCurrency(xTokenValue);
         }
 
-        private void OnCurrencyValueChanged(string newValue)
-        {
-            if (!string.IsNullOrEmpty(newValue))
-            {
-                float currencyValue = 0;
-                if (float.TryParse(newValue, out currencyValue))
-                {
-                    CalculateXToken(currencyValue);
-                }
-            }
+        private void OnCurrencyValueChanged(string newValue) {
+            if (string.IsNullOrEmpty(newValue)) return;
+            if (!float.TryParse(newValue, out float currencyValue)) return;
+            CalculateXToken(currencyValue);
         }
 
         private void Init(List<ExchangeNetwork> networks)
@@ -111,7 +113,8 @@ namespace Features.BuyXFlow.UIControllers
                 await FetchExchangeRateAsync(_chainId, _tokenUUID);
                 OnXTokenValueChanged(xTokenInputField.text);
             }
-            catch {
+            catch(Exception e) {
+                Debug.Log("Unable to update currency: " + e.Message);
                 Hide();
             }
         }
@@ -128,15 +131,12 @@ namespace Features.BuyXFlow.UIControllers
         private async UniTask FetchCurrencyRatesAsync(int chainId)
         {
             var response = await XChain.Instance.APIService.GetPrice(chainId);
-            if (response.IsSuccess)
-            {
+            if (response.IsSuccess){
                 currencyRates = response.SuccessResponse;
                 Debug.Log(response.SuccessResponse);
+                return;
             }
-            else
-            {
-                throw new System.Exception("Failed to fetch currency rate");
-            }
+            throw new Exception($"Failed to fetch currency rate: {response.FailureResponse.message}");
         }
 
         private async UniTask FetchExchangeRateAsync(int chainId, string tokenUUID) {
@@ -144,20 +144,18 @@ namespace Features.BuyXFlow.UIControllers
             if (response.IsSuccess) {
                 _exchangeRateInEth = response.SuccessResponse.exchangeRate;
                 Debug.Log(response.SuccessResponse);
+                return;
             }
-            else {
-                throw new System.Exception("Failed to fetch currency rate");
-            }
+            throw new Exception($"Failed to fetch currency rate: {response.FailureResponse.message}");
         }
 
         private async UniTask FetchXTokenRateAsync(int chainId) {
             var response = await XChain.Instance.APIService.GetXTokenPriceInUSDT(chainId);
             if (response.IsSuccess) {
                 _xTokenConversionRate = response.SuccessResponse;
+                return;
             }
-            else {
-                throw new System.Exception("Failed to fetch token rate");
-            }
+            throw new Exception($"Failed to fetch token rate {response.FailureResponse.message}");
         }
 
         private void UpdateBalanceHeaderText(int selectedIndex)
@@ -179,15 +177,12 @@ namespace Features.BuyXFlow.UIControllers
         private async void UpdateBalance()
         {
             var response = await XChain.Instance.APIService.GetBalance(_chainId, _tokenUUID, _accessToken);
-            if (response.IsSuccess)
-            {
+            if (response.IsSuccess) {
                 balanceText.text = $"Balance: <color=black><b>{response.SuccessResponse.balance} {_symbol}</b></color>";
                 Debug.Log($"Balance: {response.SuccessResponse.balance}");
+                return;
             }
-            else
-            {
-                throw new System.Exception("Failed to fetch balance");
-            }
+            throw new Exception($"Failed to fetch balance: {response.FailureResponse.message}");
         }
 
         private void CalculateCurrency(float xTokenAmount)
@@ -208,9 +203,8 @@ namespace Features.BuyXFlow.UIControllers
             xTokenInputField.text = xTokenAmount.ToString();
         }
 
-        public void BuyXToken()
-        {
-            SendBuyXTokenRequestAsync();
+        public async void BuyXToken(){
+            await SendBuyXTokenRequestAsync();
         }
 
         private async UniTask SendBuyXTokenRequestAsync()
@@ -234,14 +228,14 @@ namespace Features.BuyXFlow.UIControllers
             }
         }
 
-        public void GetWalletAddress() {
-            GetPlayerToken();
+        public async void GetWalletAddress() {
+            await GetPlayerToken();
         }
 
         private async UniTask GetPlayerToken() {
             var response = await XChain.Instance.APIService.GetUserDetails(_accessToken);
             if (response.IsSuccess) {
-                XChain.Instance.Context.Web3Context.PrivateKey = response.SuccessResponse.walletAddress;
+                XChain.Instance.Context.Web3Context.AccessKey = response.SuccessResponse.walletAddress;
                 Debug.Log(response.SuccessResponse.walletAddress);
             }
             else {
@@ -249,8 +243,8 @@ namespace Features.BuyXFlow.UIControllers
             }
         }
 
-        public void GetUserNFTDetails() {
-            GetNFTDetails();
+        public async void GetUserNFTDetails() {
+            await GetNFTDetails();
         }
 
         private async UniTask GetNFTDetails() {
@@ -263,8 +257,8 @@ namespace Features.BuyXFlow.UIControllers
             }
         }
 
-        public void GetAllNFTDetails() {
-            GetAllNFTsDetails();
+        public async void GetAllNFTDetails() {
+            await GetAllNFTsDetails();
         }
 
         private async UniTask GetAllNFTsDetails() {
@@ -280,31 +274,27 @@ namespace Features.BuyXFlow.UIControllers
             }
         }
 
-        public void BuyNFT() {
-            BuyUserNFT();
-        }
+        
+        // }
+        // private async UniTask BuyUserNFT() {
+        //     string _nftId = ""; //add nftId here to purchase
+        //     var buyParams = new BuyNFTRequestParams() {
+        //         quantity = _nftQuantity
+        //     };
+        //     var response = await XChain.Instance.APIService.BuyNFT(buyParams, _nftId, _accessToken);
+        //     if (response.IsSuccess) {
+        //         Debug.Log(response.SuccessResponse);
+        //     }
+        //     else {
+        //         Debug.Log($"Purchase Failed: {response.FailureResponse.message}");
+        //     }
+        // }
 
-        private async UniTask BuyUserNFT() {
-            string _nftId = ""; //add nftId here to purchase
-            var buyParams = new BuyNFTRequestParams() {
-                quantity = _nftQuantity
-            };
-            var response = await XChain.Instance.APIService.BuyNFT(buyParams, _nftId, _accessToken);
-            if (response.IsSuccess) {
-                Debug.Log(response.SuccessResponse);
-            }
-            else {
-                Debug.Log($"Purchase Failed: {response.FailureResponse.message}");
-            }
-        }
-
-        public override void OnHide()
-        {
+        public override void OnHide(){
 
         }
 
-        public override void OnShow()
-        {
+        public override void OnShow(){
 
         }
     }
