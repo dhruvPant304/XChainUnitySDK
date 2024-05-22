@@ -17,7 +17,7 @@ public class StartLoginFlowButton : MonoBehaviour {
     [SerializeField] private GameObject loginPanel;
 
 
-    public void Start() {
+    private void Start() {
         string loginCredentials = PlayerPrefs.GetString("loginCredentials");
         Debug.Log(JsonUtility.FromJson<EventData>(loginCredentials));
         if (!string.IsNullOrEmpty(loginCredentials)) {
