@@ -57,8 +57,7 @@ namespace Features.BuyXFlow.UIControllers
             }
         }
 
-        private void Start()
-        {
+        public void Init() {
             XChain.OnEvent(XChainEvents.StartBuyXSuccess, async (context) => {
                 xTokenInputField.text = "0";
                 Init(context.BuyXContext.exchangeNetworks);
@@ -67,7 +66,6 @@ namespace Features.BuyXFlow.UIControllers
                 await FetchExchangeRateAsync(_chainId, _tokenUUID);
                 CalculateCurrency(float.Parse(xTokenInputField.text));
                 SetEventListeners();
-                Show();
             });
         }
 
@@ -241,6 +239,10 @@ namespace Features.BuyXFlow.UIControllers
             else {
                 Debug.Log($"Get User Details Failed: {response.FailureResponse.message}");
             }
+        }
+
+        public void ExitBuyXFlow() {
+            XChain.EndBuyXFlow();
         }
 
         public override void OnHide(){

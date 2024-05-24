@@ -63,5 +63,8 @@ public class StartLoginFlowButton : MonoBehaviour {
         XChain.OnEvent(XChainEvents.StartBuyXSuccess, (context) => {
             loginPanel.SetActive(false);
         });
+        XChain.OnEvent(XChainEvents.BuyXFlowClosed, (context) => {
+            loginPanel.SetActive(true);
+        });
     }
 }

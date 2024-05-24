@@ -8,34 +8,31 @@ namespace Features.BuyXFlow.UIControllers
         [SerializeField] BuyXController buyXController;
         [SerializeField] BuyNFTController buyNFTController;
 
-        public void OpenBuyXView()
-        {
+        public void OpenBuyXView(){
             if (buyXController == null) return;
             buyXController.Show();
         }
 
-        public void HideBuyXView()
-        {
+        public void HideBuyXView(){
             if (buyXController == null) return;
             buyXController.Hide();
         }
 
-        public void OpenBuyNFTView()
-        {
+        public void OpenBuyNFTView(){
             if (buyNFTController == null) return;
             buyNFTController.Show();
         }
 
-        public void HideBuyNFTView()
-        {
+        public void HideBuyNFTView(){
             if (buyNFTController == null) return;
             buyNFTController.Hide();
         }
 
-        protected override void Init()
-        {
-            //HideBuyNFTView();
-            //HideBuyXView();
+        protected override void Init(){
+            buyXController.Init();
+            buyXController.Hide();
         }
+
+
     }
 }

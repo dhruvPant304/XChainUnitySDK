@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+    //TODO: Delete this later
     // Start is called before the first frame update
     void Start()
     {
-        XChain.StartGame();
+        //XChain.StartGame();
         
         XChain.OnEvent(XChainEvents.LoginSuccess, (context) =>
         {
             Debug.Log("Logged In successfully");
             
-            XChain.StartGame();
+            //XChain.StartGame();
             XChain.SubscribeToEvent(XChainEvents.StartGameSuccess, (context) =>
             {
                 Debug.Log($"Game Started Successfully {context.GameContext.SessionID}");
@@ -24,7 +25,7 @@ public class Test : MonoBehaviour
             });
             
             
-            XChain.CompleteGame();
+            //XChain.CompleteGame();
             XChain.SubscribeToEvent(XChainEvents.CompleteGameSuccess, (context) =>
             {
                 Debug.Log("Complete Game Success");

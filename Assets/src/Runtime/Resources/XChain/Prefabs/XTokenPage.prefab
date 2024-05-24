@@ -121,7 +121,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7257817242723592208}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7346910309679566964}
+        m_TargetAssemblyTypeName: Features.BuyXFlow.UIControllers.BuyXController,
+          XChain
+        m_MethodName: ExitBuyXFlow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5526103683463451556
 GameObject:
   m_ObjectHideFlags: 0
@@ -4807,7 +4820,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7346910309679566967}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.7777779, y: 1.7777779, z: 1.7777779}
   m_ConstrainProportionsScale: 0
@@ -4841,7 +4854,7 @@ MonoBehaviour:
   conversionRateText: {fileID: 5526103683958557190}
   xTokenInputField: {fileID: 5526103685202453030}
   currencyInputField: {fileID: 5526103684975463832}
-  accessToken: 
+  accessToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMmY5ZmYzOC1hMjE1LTQxZjEtODExZi01M2U3YmNiNjY1NDciLCJpYXQiOjE3MTYyODMyMDgsImV4cCI6MTcxNjM2OTYwOH0.lBteQiVrobdLHG0_t48kQzXuObC291xxa_KmLuMDnAVLuVOHRy5ofjOD3S_1HOGfxPpSfdi-VLCgEQLAAewA4khJIcQG6iryHhp-yjo8Xmzanm107kzl7rJBZTxLcIPPw-M4kZHIrWmOSbgii3AtDWYNFGZxWxZXIKU8HYLOTxmQmB08RW9_oPO0qCpGafSqVdOWmZ_WEHPP_bs95ZVzOaZxsH2u541hElHwfT-BHExfnvaUTHBellaIH_YbAH5vHR_7ouCCM6ubwhPZoSHjMCcR2oG0ZjjzQ9911wU6f-50bJGPxoo3OOXu9bWrb8PD8fk22kVh5VftxnOkZjjr7Q
   accessKey: 283c238b82d0cfba454f9b01a7c205bd
 --- !u!1 &7346910310301659376
 GameObject:

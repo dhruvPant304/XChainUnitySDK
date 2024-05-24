@@ -6,6 +6,7 @@ using Assets.Scripts.Features.Communication.Messages;
 using Core.API;
 using Core.App;
 using Cysharp.Threading.Tasks;
+using Features.BuyXFlow.UIControllers;
 using Features.Communication.Enums;
 using Features.Communication.Types;
 using RiskyTools.Messaging;
@@ -26,10 +27,20 @@ namespace Features.Communication.Singletons
         public AppConfig AppConfig => _appConfig;
         
         protected override void Init(){
+            //Load config data
             _appConfig = AppConfig.LoadData();
             _apiService = new APIService(_appConfig.networkSettings);
             _messagingService.Subscribe<XChainEventMessage>(OnXChainMessageEventReceived, SubscriptionType.Permanent);
+            
+            //Initialize the XChain Canvas
             LaunchStateMachine();
+            InitializeXChainCanvas();
+        }
+
+        private void InitializeXChainCanvas(){
+            var canvasPrefab = Resources.Load<XChainCanvas>("XChain/Prefabs/XChainCanvas");
+            var canvas = Instantiate(canvasPrefab);
+            canvas.transform.SetParent(transform);
         }
 
         private void LaunchStateMachine()
@@ -226,26 +237,11 @@ namespace Features.Communication.Singletons
         #endregion
 
         #region X CHAIN API
-        public static void StartLoginFlow()
-        {
-            Instance.SendXChainEvent(XChainEvents.StartLogin);
-        }
-
-        public static void StartGame() => Instance.SendXChainEvent(XChainEvents.StartGame);
-        public static void CompleteGame() => Instance.SendXChainEvent(XChainEvents.CompleteGame);
-        public static void UpdateScore(int score)
-        {
-            Instance.Context.GameContext.Score = score;
-            Instance.SendXChainEvent(XChainEvents.UpdateScore);
-        }
+        public static void StartLoginFlow() => Instance.SendXChainEvent(XChainEvents.StartLogin);
         public static void StartBuyXFlow() => Instance.SendXChainEvent(XChainEvents.StartBuyXFlow);
-
-        public static void StartAndWaitLoginCompletion() {
-            Instance.SendXChainEvent(XChainEvents.StartAndWaitLoginCompletion);
-        }
-
+        public static void EndBuyXFlow() => Instance.SendXChainEvent(XChainEvents.EndBuyXFlow);
+        public static void StartAndWaitLoginCompletion() => Instance.SendXChainEvent(XChainEvents.StartAndWaitLoginCompletion);
         public static void CancelOperation() => Instance.OnEventReceived(XChainEvents.CancelOperation);
-
         #endregion
 
     }
