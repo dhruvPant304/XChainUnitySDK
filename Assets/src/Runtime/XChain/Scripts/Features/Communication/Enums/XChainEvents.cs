@@ -28,6 +28,9 @@
         StartBuyXSuccess = 18,
         StartBuyXFailed = 19,
 
+        EndBuyXFlow = 20,
+        BuyXFlowClosed = 21,
+
         CancelOperation = 100
     }
 }

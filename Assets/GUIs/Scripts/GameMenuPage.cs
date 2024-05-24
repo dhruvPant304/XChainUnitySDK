@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//TODO: Delete this later
 public class GameMenuPage : MonoBehaviour
 {
     [SerializeField] private Button startGame;
@@ -23,7 +24,7 @@ public class GameMenuPage : MonoBehaviour
 
     private void OnGameStartClicked()
     {
-        XChain.StartGame();
+        //XChain.StartGame();
         XChain.SubscribeToEvent(XChainEvents.StartGameSuccess, (context) =>
         {
             Debug.Log($"Game Started Successfully {context.GameContext.SessionID}");
@@ -44,7 +45,7 @@ public class GameMenuPage : MonoBehaviour
 
     private void OnCompleteGameClicked()
     {
-        XChain.CompleteGame();
+        //XChain.CompleteGame();
         XChain.SubscribeToEvent(XChainEvents.CompleteGameSuccess, (context) =>
         {
             Debug.Log("Complete Game Success");

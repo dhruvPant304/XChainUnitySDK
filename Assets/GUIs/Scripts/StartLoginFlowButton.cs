@@ -17,7 +17,7 @@ public class StartLoginFlowButton : MonoBehaviour {
     [SerializeField] private GameObject loginPanel;
 
 
-    public void Start() {
+    private void Start() {
         string loginCredentials = PlayerPrefs.GetString("loginCredentials");
         Debug.Log(JsonUtility.FromJson<EventData>(loginCredentials));
         if (!string.IsNullOrEmpty(loginCredentials)) {
@@ -62,6 +62,9 @@ public class StartLoginFlowButton : MonoBehaviour {
         XChain.StartBuyXFlow();
         XChain.OnEvent(XChainEvents.StartBuyXSuccess, (context) => {
             loginPanel.SetActive(false);
+        });
+        XChain.OnEvent(XChainEvents.BuyXFlowClosed, (context) => {
+            loginPanel.SetActive(true);
         });
     }
 }

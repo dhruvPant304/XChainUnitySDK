@@ -57,8 +57,7 @@ namespace Features.BuyXFlow.UIControllers
             }
         }
 
-        private void Start()
-        {
+        public void Init() {
             XChain.OnEvent(XChainEvents.StartBuyXSuccess, async (context) => {
                 xTokenInputField.text = "0";
                 Init(context.BuyXContext.exchangeNetworks);
@@ -67,7 +66,6 @@ namespace Features.BuyXFlow.UIControllers
                 await FetchExchangeRateAsync(_chainId, _tokenUUID);
                 CalculateCurrency(float.Parse(xTokenInputField.text));
                 SetEventListeners();
-                Show();
             });
         }
 
@@ -243,52 +241,9 @@ namespace Features.BuyXFlow.UIControllers
             }
         }
 
-        public async void GetUserNFTDetails() {
-            await GetNFTDetails();
+        public void ExitBuyXFlow() {
+            XChain.EndBuyXFlow();
         }
-
-        private async UniTask GetNFTDetails() {
-            var response = await XChain.Instance.APIService.GetOwnedNFTDetails(XChain.Instance.AppConfig.gameSettings.gameID, _accessToken);
-            if (response.IsSuccess) {
-                Debug.Log(response.SuccessResponse);
-            }
-            else {
-                Debug.Log($"Get User NFT Details Failed: {response.FailureResponse.message}");
-            }
-        }
-
-        public async void GetAllNFTDetails() {
-            await GetAllNFTsDetails();
-        }
-
-        private async UniTask GetAllNFTsDetails() {
-            string _collectionId = ""; //add collection id here to filter nft details with collection
-            int _perPageAmount = 10;
-            int _page = 1;
-            var response = await XChain.Instance.APIService.GetAllNFTDetails(XChain.Instance.AppConfig.gameSettings.gameID, _collectionId, _perPageAmount,_page);
-            if (response.IsSuccess) {
-                Debug.Log(response.SuccessResponse);
-            }
-            else {
-                Debug.Log($"Get All NFT Details Failed: {response.FailureResponse.message}");
-            }
-        }
-
-        
-        // }
-        // private async UniTask BuyUserNFT() {
-        //     string _nftId = ""; //add nftId here to purchase
-        //     var buyParams = new BuyNFTRequestParams() {
-        //         quantity = _nftQuantity
-        //     };
-        //     var response = await XChain.Instance.APIService.BuyNFT(buyParams, _nftId, _accessToken);
-        //     if (response.IsSuccess) {
-        //         Debug.Log(response.SuccessResponse);
-        //     }
-        //     else {
-        //         Debug.Log($"Purchase Failed: {response.FailureResponse.message}");
-        //     }
-        // }
 
         public override void OnHide(){
 

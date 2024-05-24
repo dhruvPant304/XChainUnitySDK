@@ -1,13 +1,8 @@
-using Core.UI;
 using Cysharp.Threading.Tasks;
 using Features.BuyXFlow.UIControllers;
 using Features.Communication.Singletons;
-using Features.Web3Authentication.UIControllers;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using XNode;
 using XNodeStateMachine;
 
@@ -29,6 +24,7 @@ namespace Features.BuyXFlow.States
             if (response != null && response.IsSuccess) {
                 Debug.Log(response.SuccessResponse.ToList());
                 XChain.Instance.Context.BuyXContext.exchangeNetworks = response.SuccessResponse.ToList();
+                XChainCanvas.Instance.OpenBuyXView();
                 ExitThroughNodePort("success");
             }
             else {
