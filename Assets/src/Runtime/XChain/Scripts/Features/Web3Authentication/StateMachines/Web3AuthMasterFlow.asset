@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: Exit State
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1368, y: -536}
+  position: {x: 1351.2646, y: -435.95642}
   ports:
     keys:
     - enter
@@ -87,8 +87,11 @@ MonoBehaviour:
       _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: no
-        node: {fileID: 4880781623521280151}
+      - fieldName: yes
+        node: {fileID: 2115827817281127675}
+        reroutePoints: []
+      - fieldName: success
+        node: {fileID: 8136912105867615389}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -117,7 +120,7 @@ MonoBehaviour:
   m_Name: Wait For Event State
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -385.9948, y: -223.4566}
+  position: {x: -187.37894, y: -233.7552}
   ports:
     keys:
     - exit
@@ -129,7 +132,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: enter
-        node: {fileID: -1333774793149347303}
+        node: {fileID: 2115827817281127675}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -167,90 +170,6 @@ MonoBehaviour:
     _dynamic: 0
   eventType: 16
   consumeEvent: 1
---- !u!114 &-1333774793149347303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 162719d2244844c189834c5070f6a317, type: 3}
-  m_Name: Is Waiting Event
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: -6.382324, y: -147.749}
-  ports:
-    keys:
-    - yes
-    - no
-    - enter
-    values:
-    - _fieldName: yes
-      _node: {fileID: -1333774793149347303}
-      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: enter
-        node: {fileID: 2225576513629496259}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: no
-      _node: {fileID: -1333774793149347303}
-      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: enter
-        node: {fileID: 2115827817281127675}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: enter
-      _node: {fileID: -1333774793149347303}
-      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: exit
-        node: {fileID: -1810264397670540126}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  enter:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
-  yes:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
-  no:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
-  eventType: 100
 --- !u!114 &-1038300323507858931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,8 +252,6 @@ MonoBehaviour:
   - {fileID: 3729894370617943178}
   - {fileID: -2430950795281412491}
   - {fileID: -1810264397670540126}
-  - {fileID: 4880781623521280151}
-  - {fileID: -1333774793149347303}
   - {fileID: 4971402778327198383}
   - {fileID: 2225576513629496259}
   - {fileID: 1692639220101836819}
@@ -370,7 +287,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: enter
-        node: {fileID: 4880781623521280151}
+        node: {fileID: 0}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -394,7 +311,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: no
-        node: {fileID: -1333774793149347303}
+        node: {fileID: 0}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -529,7 +446,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: enter
-        node: {fileID: 4880781623521280151}
+        node: {fileID: -2430950795281412491}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -552,8 +469,8 @@ MonoBehaviour:
       _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: no
-        node: {fileID: -1333774793149347303}
+      - fieldName: exit
+        node: {fileID: -1810264397670540126}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -599,7 +516,7 @@ MonoBehaviour:
   m_Name: Exit State
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1376.8354, y: 345.99814}
+  position: {x: 1369.4794, y: 213.58757}
   ports:
     keys:
     - enter
@@ -609,11 +526,8 @@ MonoBehaviour:
       _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: yes
-        node: {fileID: -1333774793149347303}
-        reroutePoints: []
-      - fieldName: yes
-        node: {fileID: 4880781623521280151}
+      - fieldName: cancelled
+        node: {fileID: 8136912105867615389}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -713,7 +627,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: enter
-        node: {fileID: 4880781623521280151}
+        node: {fileID: 0}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -737,7 +651,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: no
-        node: {fileID: -1333774793149347303}
+        node: {fileID: 0}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -770,99 +684,6 @@ MonoBehaviour:
     _connectionType: 0
     _typeConstraint: 0
     _dynamic: 0
---- !u!114 &4880781623521280151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 162719d2244844c189834c5070f6a317, type: 3}
-  m_Name: Is Waiting Event
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 855.914, y: -472.79007}
-  ports:
-    keys:
-    - yes
-    - no
-    - enter
-    values:
-    - _fieldName: yes
-      _node: {fileID: 4880781623521280151}
-      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: enter
-        node: {fileID: 2225576513629496259}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: no
-      _node: {fileID: 4880781623521280151}
-      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: enter
-        node: {fileID: -2430950795281412491}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: enter
-      _node: {fileID: 4880781623521280151}
-      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: success
-        node: {fileID: 8136912105867615389}
-        reroutePoints: []
-      - fieldName: yes
-        node: {fileID: 0}
-        reroutePoints: []
-      - fieldName: yes
-        node: {fileID: 0}
-        reroutePoints: []
-      - fieldName: yes
-        node: {fileID: 2115827817281127675}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  enter:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
-  yes:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
-  no:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
-  eventType: 100
 --- !u!114 &4971402778327198383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,7 +697,7 @@ MonoBehaviour:
   m_Name: Exit State
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 854.6785, y: -303.21313}
+  position: {x: 1366.666, y: 64.59405}
   ports:
     keys:
     - enter
@@ -985,6 +806,7 @@ MonoBehaviour:
     - failed
     - success
     - enter
+    - cancelled
     values:
     - _fieldName: failed
       _node: {fileID: 8136912105867615389}
@@ -1004,7 +826,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: enter
-        node: {fileID: 4880781623521280151}
+        node: {fileID: -2430950795281412491}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -1019,6 +841,18 @@ MonoBehaviour:
         node: {fileID: 2115827817281127675}
         reroutePoints: []
       _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: cancelled
+      _node: {fileID: 8136912105867615389}
+      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: 2225576513629496259}
+        reroutePoints: []
+      _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
@@ -1041,6 +875,15 @@ MonoBehaviour:
     _typeConstraint: 0
     _dynamic: 0
   success:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  cancelled:
     _fieldName: 
     _node: {fileID: 0}
     _typeQualifiedName: 
