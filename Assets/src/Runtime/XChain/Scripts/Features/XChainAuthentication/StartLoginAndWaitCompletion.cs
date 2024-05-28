@@ -17,23 +17,43 @@ namespace Features.XChainAuthentication.States {
 
         [Output] public NodePort failed;
         [Output] public NodePort success;
+        [Output] public NodePort cancelled;
 
         protected override void Enter() {
-            StartLogin();
+            CheckForCancellation().Forget();
+            StartLogin().Forget();
         }
 
-        public async void StartLogin() {
+        public async UniTask StartLogin() {
             webView = (new GameObject("WebViewObject")).AddComponent<WebViewObject>();
-            webView.Init(ua: userAgent, cb: (msg) => {
+            webView.Init(ua: userAgent, cb: async (msg) => {
                 var jsonObject = JsonUtility.FromJson<EventData>(msg);
                 Debug.Log($"{jsonObject.eventData.accessToken} {jsonObject.eventData.accessKey}");
                 XChain.Instance.Context.SessionContext.AccessToken = jsonObject.eventData.accessToken;
                 XChain.Instance.Context.Web3Context.AccessKey = jsonObject.eventData.accessKey;
                 webView.EvaluateJS($"localStorage.removeItem('{keyName}')");
-                ExitThroughNodePort("success");
+                await FetchUserDetails();
             });
+
             webView.SetVisibility(true);
             await LoadWebContent(url);
+        }
+
+        public async UniTask CheckForCancellation(){
+            await UniTask.WaitUntil(() => Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Menu));
+            Debug.Log("User cancelled login");
+            ExitThroughNodePort("cancelled");
+        }
+
+        public async UniTask FetchUserDetails(){
+            var response = await XChain.Instance.APIService.GetUserDetails(XChain.Instance.Context.SessionContext.AccessToken);
+            if(response.IsSuccess){
+                XChain.Instance.Context.Web3Context.UserData = response.SuccessResponse;
+                ExitThroughNodePort("success");
+            }
+            else{
+                ExitThroughNodePort("failed");
+            }
         }
 
         protected override void Exit() {

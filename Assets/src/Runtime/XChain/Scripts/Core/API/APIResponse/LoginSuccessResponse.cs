@@ -7,7 +7,7 @@ namespace Core.API.APIResponse
     public class LoginSuccessResponse
     {
         public string accessToken;
-        public UserDetailsSucessResponse user;
+        public UserDetails user;
         public string privateKey;
     }
 }

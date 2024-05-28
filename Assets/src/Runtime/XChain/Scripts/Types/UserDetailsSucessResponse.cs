@@ -2,7 +2,7 @@
 
 namespace Core.API.APIResponse {
     [Serializable]
-    public class UserDetailsSucessResponse
+    public class UserDetails
     {
         public string id;
         public string createdBy;

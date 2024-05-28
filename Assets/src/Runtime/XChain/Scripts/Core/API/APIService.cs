@@ -64,9 +64,9 @@ namespace Core.API
             return await SendWebRequest<CheckLoginRequestResponse, FailedResponse>(url, "GET");
         }
 
-        public async UniTask<RequestResponse<UserDetailsSucessResponse, FailedResponse>> GetUserDetails(string token) {
+        public async UniTask<RequestResponse<UserDetails, FailedResponse>> GetUserDetails(string token) {
             var url = ServerUrl + $"/api/game-api/v1/auth/whoami";
-            return await SendWebRequest<UserDetailsSucessResponse, FailedResponse>(url, "GET", null, token, token);
+            return await SendWebRequest<UserDetails, FailedResponse>(url, "GET", null, token, token);
         }
 
         public async UniTask<RequestResponse<GetNFTSuccessResponse[], FailedResponse>> GetOwnedNFTDetails(string gameId, string authToken) {

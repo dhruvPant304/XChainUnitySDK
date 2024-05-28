@@ -21,7 +21,7 @@ namespace Features.XChainAuthentication.States {
                 var loginCred = JsonUtility.FromJson<LoginCredentialData>(loginCredJson);
                 XChain.Instance.Context.SessionContext.AccessToken = loginCred.accessToken;
                 XChain.Instance.Context.Web3Context.AccessKey = loginCred.privateKey;
-                XChain.Instance.Context.Web3Context.WalletAddress = loginCred.walletAddress;
+                XChain.Instance.Context.Web3Context.UserData = loginCred.userDetails;
                 ExitThroughNodePort("yes");
                 return;
             }
