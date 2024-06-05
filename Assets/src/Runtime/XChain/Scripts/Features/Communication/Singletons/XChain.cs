@@ -61,9 +61,8 @@ namespace Features.Communication.Singletons
 
         #region Data
 
-        public XChainContext Context;
-        public XChainContext GetContext()
-        {
+        public XChainContext Context = new();
+        public XChainContext GetContext(){
             return Context;
         }
 

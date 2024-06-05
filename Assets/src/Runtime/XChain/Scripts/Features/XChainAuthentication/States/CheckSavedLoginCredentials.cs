@@ -12,7 +12,7 @@ namespace Features.XChainAuthentication.States {
         [Output] public NodePort no;
 
         protected override void Enter(){
-            if(!PlayerPrefs.HasKey("loginCredentials")){
+            if(!PlayerPrefs.HasKey("loginCredentials") || string.IsNullOrWhiteSpace(PlayerPrefs.GetString("loginCredentials"))){
                 ExitThroughNodePort("no");
                 return;
             }

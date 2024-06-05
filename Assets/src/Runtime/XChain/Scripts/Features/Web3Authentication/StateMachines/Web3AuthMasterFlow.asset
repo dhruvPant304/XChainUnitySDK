@@ -148,11 +148,11 @@ MonoBehaviour:
       _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: yes
-        node: {fileID: 2115827817281127675}
-        reroutePoints: []
       - fieldName: exit
         node: {fileID: -2547814433507834677}
+        reroutePoints: []
+      - fieldName: yes
+        node: {fileID: 2318481029669446186}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: enter
-        node: {fileID: 2115827817281127675}
+        node: {fileID: 2318481029669446186}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -320,8 +320,8 @@ MonoBehaviour:
   - {fileID: 6752847937719486031}
   - {fileID: -8999818448343495589}
   - {fileID: 8136912105867615389}
-  - {fileID: 2115827817281127675}
   - {fileID: -2547814433507834677}
+  - {fileID: 2318481029669446186}
   exitName: Failed
 --- !u!114 &394682613085437016
 MonoBehaviour:
@@ -482,89 +482,6 @@ MonoBehaviour:
     _connectionType: 0
     _typeConstraint: 0
     _dynamic: 0
---- !u!114 &2115827817281127675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2f05cbef42eeda41a656fac3ea59c37, type: 3}
-  m_Name: Check Save Login Credentials
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 368.82068, y: -520.08496}
-  ports:
-    keys:
-    - yes
-    - no
-    - enter
-    values:
-    - _fieldName: yes
-      _node: {fileID: 2115827817281127675}
-      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: enter
-        node: {fileID: -2430950795281412491}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: no
-      _node: {fileID: 2115827817281127675}
-      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: enter
-        node: {fileID: 8136912105867615389}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: enter
-      _node: {fileID: 2115827817281127675}
-      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: exit
-        node: {fileID: -1810264397670540126}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  enter:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
-  yes:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
-  no:
-    _fieldName: 
-    _node: {fileID: 0}
-    _typeQualifiedName: 
-    connections: []
-    _direction: 0
-    _connectionType: 0
-    _typeConstraint: 0
-    _dynamic: 0
 --- !u!114 &2225576513629496259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,6 +522,89 @@ MonoBehaviour:
     _typeConstraint: 0
     _dynamic: 0
   exitName: Canceled
+--- !u!114 &2318481029669446186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Check Saved Login Credentails
+  m_EditorClassIdentifier: XChain:Features.XChainAuthentication.States:CheckSavedLoginCredentails
+  graph: {fileID: 11400000}
+  position: {x: 343.32507, y: -488.63785}
+  ports:
+    keys:
+    - yes
+    - no
+    - enter
+    values:
+    - _fieldName: yes
+      _node: {fileID: 2318481029669446186}
+      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: -2430950795281412491}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: no
+      _node: {fileID: 2318481029669446186}
+      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: enter
+        node: {fileID: 8136912105867615389}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: enter
+      _node: {fileID: 2318481029669446186}
+      _typeQualifiedName: XNode.NodePort, XNode, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: exit
+        node: {fileID: -1810264397670540126}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  enter:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  yes:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
+  no:
+    _fieldName: 
+    _node: {fileID: 0}
+    _typeQualifiedName: 
+    connections: []
+    _direction: 0
+    _connectionType: 0
+    _typeConstraint: 0
+    _dynamic: 0
 --- !u!114 &3729894370617943178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,7 +900,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: no
-        node: {fileID: 2115827817281127675}
+        node: {fileID: 2318481029669446186}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
