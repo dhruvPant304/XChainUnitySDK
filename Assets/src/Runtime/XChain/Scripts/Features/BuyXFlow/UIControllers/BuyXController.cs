@@ -60,7 +60,7 @@ namespace Features.BuyXFlow.UIControllers
         public void Init() {
             XChain.OnEvent(XChainEvents.StartBuyXSuccess, async (context) => {
                 xTokenInputField.text = "0";
-                Init(context.BuyXContext.exchangeNetworks);
+                InitNetworks(context.BuyXContext.exchangeNetworks);
                 await UpdateCurrency(0);
                 await FetchXTokenRateAsync(_chainId);
                 await FetchExchangeRateAsync(_chainId, _tokenUUID);
@@ -89,7 +89,7 @@ namespace Features.BuyXFlow.UIControllers
             CalculateXToken(currencyValue);
         }
 
-        private void Init(List<ExchangeNetwork> networks)
+        private void InitNetworks(List<ExchangeNetwork> networks)
         {
             exchangeNetworks.Clear();
             exchangeNetworks = networks;
