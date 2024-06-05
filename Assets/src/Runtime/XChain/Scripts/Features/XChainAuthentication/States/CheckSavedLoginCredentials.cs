@@ -17,6 +17,7 @@ namespace Features.XChainAuthentication.States {
                 return;
             }
 
+            Debug.Log($"Checking saved Login credentials");
             var loginCredJson = PlayerPrefs.GetString("loginCredentials");
             try{
                 var loginCred = JsonConvert.DeserializeObject<LoginCredentialData>(loginCredJson);
