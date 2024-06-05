@@ -19,6 +19,7 @@ namespace Features.XChainAuthentication.States {
             var loginCredJson = PlayerPrefs.GetString("loginCredentials");
             try{
                 var loginCred = JsonUtility.FromJson<LoginCredentialData>(loginCredJson);
+                Debug.Log($"Fetched saved credentials as: {loginCred}");
                 XChain.Instance.Context.SessionContext.AccessToken = loginCred.accessToken;
                 XChain.Instance.Context.Web3Context.AccessKey = loginCred.privateKey;
                 XChain.Instance.Context.Web3Context.UserData = loginCred.userDetails;
