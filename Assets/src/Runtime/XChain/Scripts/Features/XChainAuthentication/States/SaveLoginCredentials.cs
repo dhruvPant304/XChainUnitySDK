@@ -8,10 +8,10 @@ namespace Features.XChainAuthentication.States {
     public class SaveLoginCredentials : State {
         [Output] public NodePort exit;
         protected override void Enter() {
-            var loginCredentials = new EventData();
-            loginCredentials.eventData = new EventDataData();
-            loginCredentials.eventData.accessToken = XChain.Instance.GetContext().SessionContext.AccessToken;
-            loginCredentials.eventData.accessKey = XChain.Instance.GetContext().Web3Context.AccessKey;
+            var loginCredentials = new LoginCredentialData();
+            loginCredentials.accessToken = XChain.Instance.GetContext().SessionContext.AccessToken;
+            loginCredentials.privateKey = XChain.Instance.GetContext().Web3Context.AccessKey;
+            loginCredentials.userDetails = XChain.Instance.GetContext().Web3Context.UserData;
             var loginCredJson = JsonUtility.ToJson(loginCredentials);
             Debug.Log("cred: " + loginCredJson);
             PlayerPrefs.SetString("loginCredentials", loginCredJson.ToString());
