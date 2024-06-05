@@ -2,8 +2,7 @@
 
 namespace Core.API.APIResponse {
     [Serializable]
-    public class UserDetails
-    {
+    public class UserDetails {
         public string id;
         public string createdBy;
         public string createdById;

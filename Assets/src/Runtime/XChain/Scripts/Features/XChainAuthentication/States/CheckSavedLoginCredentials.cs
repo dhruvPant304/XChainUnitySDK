@@ -1,6 +1,7 @@
 using System;
 using Data;
 using Features.Communication.Singletons;
+using Newtonsoft.Json;
 using UnityEngine;
 using XNode;
 using XNodeStateMachine;
@@ -18,7 +19,7 @@ namespace Features.XChainAuthentication.States {
 
             var loginCredJson = PlayerPrefs.GetString("loginCredentials");
             try{
-                var loginCred = JsonUtility.FromJson<LoginCredentialData>(loginCredJson);
+                var loginCred = JsonConvert.DeserializeObject<LoginCredentialData>(loginCredJson);
                 Debug.Log($"Fetched saved credentials as: {loginCred}");
                 XChain.Instance.Context.SessionContext.AccessToken = loginCred.accessToken;
                 XChain.Instance.Context.Web3Context.AccessKey = loginCred.privateKey;

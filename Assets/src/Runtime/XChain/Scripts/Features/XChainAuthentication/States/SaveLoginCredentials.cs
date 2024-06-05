@@ -3,6 +3,7 @@ using XNodeStateMachine;
 using Data;
 using Features.Communication.Singletons;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Features.XChainAuthentication.States {
     public class SaveLoginCredentials : State {
@@ -12,9 +13,9 @@ namespace Features.XChainAuthentication.States {
             loginCredentials.accessToken = XChain.Instance.GetContext().SessionContext.AccessToken;
             loginCredentials.privateKey = XChain.Instance.GetContext().Web3Context.AccessKey;
             loginCredentials.userDetails = XChain.Instance.GetContext().Web3Context.UserData;
-            var loginCredJson = JsonUtility.ToJson(loginCredentials);
+            var loginCredJson = JsonConvert.SerializeObject(loginCredentials);
             Debug.Log("cred: " + loginCredJson);
-            PlayerPrefs.SetString("loginCredentials", loginCredJson.ToString());
+            PlayerPrefs.SetString("loginCredentials", loginCredJson);
             PlayerPrefs.Save();
             ExitThroughNodePort("exit");
         }
