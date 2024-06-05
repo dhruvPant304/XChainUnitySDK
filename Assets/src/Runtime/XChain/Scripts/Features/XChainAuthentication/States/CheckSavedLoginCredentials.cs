@@ -7,7 +7,7 @@ using XNode;
 using XNodeStateMachine;
 
 namespace Features.XChainAuthentication.States {
-    public class CheckSavedLoginCredentails : State {
+    public class CheckSavedLoginCredentials : State {
         [Output] public NodePort yes;
         [Output] public NodePort no;
 
