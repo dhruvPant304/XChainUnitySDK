@@ -57,16 +57,14 @@ namespace Features.BuyXFlow.UIControllers
             }
         }
 
-        public void Init() {
-            XChain.OnEvent(XChainEvents.StartBuyXSuccess, async (context) => {
-                xTokenInputField.text = "0";
-                InitNetworks(context.BuyXContext.exchangeNetworks);
-                await UpdateCurrency(0);
-                await FetchXTokenRateAsync(_chainId);
-                await FetchExchangeRateAsync(_chainId, _tokenUUID);
-                CalculateCurrency(float.Parse(xTokenInputField.text));
-                SetEventListeners();
-            });
+        public async void OnEnable() {
+            xTokenInputField.text = "0";
+            InitNetworks(XChain.Instance.Context.BuyXContext.exchangeNetworks);
+            await UpdateCurrency(0);
+            await FetchXTokenRateAsync(_chainId);
+            await FetchExchangeRateAsync(_chainId, _tokenUUID);
+            CalculateCurrency(float.Parse(xTokenInputField.text));
+            SetEventListeners();
         }
 
         private void SetEventListeners()

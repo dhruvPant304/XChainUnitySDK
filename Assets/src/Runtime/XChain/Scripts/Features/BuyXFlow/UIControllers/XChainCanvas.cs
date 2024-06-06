@@ -29,10 +29,7 @@ namespace Features.BuyXFlow.UIControllers
         }
 
         protected override void Init(){
-            buyXController.Init();
             buyXController.Hide();
         }
-
-
     }
 }
