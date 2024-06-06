@@ -58,6 +58,12 @@ namespace Features.BuyXFlow.UIControllers
         }
 
         public async void OnEnable() {
+            await Initialize();
+         }
+
+        private bool _initialized;
+        private async UniTask Initialize(){
+            if(_initialized) return;
             xTokenInputField.text = "0";
             InitNetworks(XChain.Instance.Context.BuyXContext.exchangeNetworks);
             await UpdateCurrency(0);
@@ -65,6 +71,7 @@ namespace Features.BuyXFlow.UIControllers
             await FetchExchangeRateAsync(_chainId, _tokenUUID);
             CalculateCurrency(float.Parse(xTokenInputField.text));
             SetEventListeners();
+            _initialized = true;
         }
 
         private void SetEventListeners()
