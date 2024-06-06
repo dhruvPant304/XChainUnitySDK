@@ -3,7 +3,7 @@ using System;
 namespace Types
 {
     [Serializable]
-    public class Currencies
+    public class Currency
     {
         public string id;
         public string name;
@@ -12,6 +12,6 @@ namespace Types
         public string symbol;
         public string status;
         public string logoURL;
-        public bool isNativeToken;
+        public bool isNativeToken; 
     }
 }

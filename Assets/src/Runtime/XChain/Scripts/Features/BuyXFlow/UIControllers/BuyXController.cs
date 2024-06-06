@@ -24,7 +24,7 @@ namespace Features.BuyXFlow.UIControllers
         [SerializeField] TMP_InputField currencyInputField;
 
         private List<ExchangeNetwork> exchangeNetworks = new List<ExchangeNetwork>();
-        private List<Currencies> currencies = new List<Currencies>();
+        private List<Currency> currencies = new List<Currency>();
         private Dictionary<string, ExchangePriceResponse> currencyRates = new Dictionary<string, ExchangePriceResponse>();
 
 
@@ -117,7 +117,7 @@ namespace Features.BuyXFlow.UIControllers
             }
         }
 
-        private void InitializeCurrencyDropDown(List<Currencies> networkCurrencies)
+        private void InitializeCurrencyDropDown(List<Currency> networkCurrencies)
         {
             currencies.Clear();
             List<string> currencyNames = networkCurrencies.Select(currency => currency.name).ToList();
@@ -158,7 +158,7 @@ namespace Features.BuyXFlow.UIControllers
 
         private void UpdateBalanceHeaderText(int selectedIndex)
         {
-            Currencies selectedCurrency = currencies[selectedIndex];
+            Currency selectedCurrency = currencies[selectedIndex];
             _tokenUUID = selectedCurrency.id;
             _symbol = currencies[selectedIndex].symbol;
             currencyText.text = $"Amount in <color=black><b>{currencies[selectedIndex].name}</b></color> you pay";

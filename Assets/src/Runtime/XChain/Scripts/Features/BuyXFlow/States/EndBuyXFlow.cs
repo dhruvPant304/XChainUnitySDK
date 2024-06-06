@@ -1,4 +1,5 @@
 using Features.BuyXFlow.UIControllers;
+using Features.Communication.Singletons;
 using XNode;
 using XNodeStateMachine;
 
@@ -6,8 +7,9 @@ namespace Features.BuyXFlow.States {
     public class EndBuyXFlow : State {
         [Output] public NodePort exit;
 
-        protected override void Enter() {
+        protected override async void Enter() {
             XChainCanvas.Instance.HideBuyXView();
+            await XChain.FetchXTokenBalance();
             ExitThroughNodePort("exit");
         }
 

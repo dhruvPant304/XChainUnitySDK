@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Types;
 using UnityEngine;
 
@@ -15,7 +16,18 @@ namespace Core.API.APIResponse
         public int chainId;
         public string explorerURL;
         public string status;
-        public Currencies[] currencies;
+        public Currency[] currencies;
+
+        public Currency GetCurrency(string tokenName){
+            try{
+                var currency = currencies
+                    .ToList()
+                    .Find((c) => c.name == tokenName);
+                return currency;
+            } catch(Exception e){
+                throw new Exception($"Failed to find a curreny with name {tokenName} in network {name}: {e}");
+            }
+        }
     }
 }
 

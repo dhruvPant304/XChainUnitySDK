@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Security.Authentication;
 using System.Threading;
 using Assets.Scripts.Features.Communication.Messages;
 using Core.API;
+using Core.API.APIResponse;
 using Core.App;
 using Cysharp.Threading.Tasks;
 using Features.BuyXFlow.UIControllers;
@@ -12,6 +15,8 @@ using Features.Communication.Types;
 using RiskyTools.Messaging;
 using RiskyTools.Messaging.Interfaces;
 using RiskyTools.Messaging.Services;
+using Types;
+using UnityEditor.Graphs;
 using UnityEngine;
 using XNodeStateMachine;
 
@@ -26,6 +31,17 @@ namespace Features.Communication.Singletons
         public IMessagingService MessagingService => _messagingService;
         public AppConfig AppConfig => _appConfig;
         
+        private float _xTokenBalance;
+        private bool _loggedIn;
+
+        public float XTokenBalance {get => _xTokenBalance; set {
+            _xTokenBalance = value;
+            OnXTokenBalanceChanged?.Invoke(_xTokenBalance);
+        }}
+        public bool LoggedIn {get =>  _loggedIn; set => _loggedIn = value;}
+
+
+
         protected override void Init(){
             //Load config data
             _appConfig = AppConfig.LoadData();
@@ -235,12 +251,49 @@ namespace Features.Communication.Singletons
 
         #endregion
 
+        #region XToken Balance
+        
+        private static ExchangeNetwork GetExchangeNetworkByName(string networkName){
+             try{
+                var network = Instance
+                    .Context
+                    .BuyXContext
+                    .exchangeNetworks.Find((e) => e.name == networkName);
+                return network;
+             }
+             catch(Exception e){
+                throw new Exception($"Failed to find network with name {networkName}: {e}");
+             }
+        }
+        #endregion
+
         #region X CHAIN API
         public static void StartLoginFlow() => Instance.SendXChainEvent(XChainEvents.StartLogin);
         public static void StartBuyXFlow() => Instance.SendXChainEvent(XChainEvents.StartBuyXFlow);
         public static void EndBuyXFlow() => Instance.SendXChainEvent(XChainEvents.EndBuyXFlow);
         public static void StartAndWaitLoginCompletion() => Instance.SendXChainEvent(XChainEvents.StartAndWaitLoginCompletion);
         public static void CancelOperation() => Instance.OnEventReceived(XChainEvents.CancelOperation);
+        /// <summary>
+        /// Invoked when XToken Balance is update
+        /// </summary>
+        ///<value> new x token balance </value> 
+        public event Action<float> OnXTokenBalanceChanged;
+        
+        /// <summary>
+        /// Fetch X token Balance for the user from server, ensure that the method
+        /// is called after login 
+        /// </summary>
+        public static async UniTask FetchXTokenBalance(){
+            var xChainNetwork = GetExchangeNetworkByName("x-chain");
+            var authToken = XChain.Instance.Context.SessionContext.AccessToken;
+            var chainId = xChainNetwork.chainId;
+            var tokenUUID = xChainNetwork.GetCurrency("X-Token").id;
+            var response = await XChain.Instance.APIService.GetBalance(chainId, tokenUUID, authToken);
+            if(response.IsSuccess){
+                var successResponse = response.SuccessResponse;
+                Instance.XTokenBalance = successResponse.balance;
+            }
+        }
         #endregion
 
     }
