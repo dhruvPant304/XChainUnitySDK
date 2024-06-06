@@ -49,6 +49,8 @@ namespace Features.XChainAuthentication.States {
             var response = await XChain.Instance.APIService.GetUserDetails(XChain.Instance.Context.SessionContext.AccessToken);
             if(response.IsSuccess){
                 XChain.Instance.Context.Web3Context.UserData = response.SuccessResponse;
+                //Fetching users XToken balance at the time of the login
+                await XChain.FetchXTokenBalance();
                 ExitThroughNodePort("success");
             }
             else{
