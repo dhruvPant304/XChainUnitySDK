@@ -11,7 +11,7 @@ namespace Features.XChainAuthentication.States {
         [Output] public NodePort yes;
         [Output] public NodePort no;
 
-        protected override void Enter(){
+        protected override async void Enter(){
             if(!PlayerPrefs.HasKey("loginCredentials") || string.IsNullOrWhiteSpace(PlayerPrefs.GetString("loginCredentials"))){
                 ExitThroughNodePort("no");
                 return;
@@ -21,10 +21,11 @@ namespace Features.XChainAuthentication.States {
             var loginCredJson = PlayerPrefs.GetString("loginCredentials");
             try{
                 var loginCred = JsonConvert.DeserializeObject<LoginCredentialData>(loginCredJson);
-                Debug.Log($"Fetched saved credentials as: {loginCred}");
-                XChain.Instance.Context.SessionContext.AccessToken = loginCred.accessToken;
-                XChain.Instance.Context.Web3Context.AccessKey = loginCred.privateKey;
-                XChain.Instance.Context.Web3Context.UserData = loginCred.userDetails;
+                Debug.Log($"Fetched saved credentials as: {loginCred}"); 
+
+                await XChain.Instance.Login(accessKey: loginCred.privateKey, 
+                    accessToken: loginCred.accessToken, 
+                    userData: loginCred.userDetails); 
                 ExitThroughNodePort("yes");
                 return;
             }

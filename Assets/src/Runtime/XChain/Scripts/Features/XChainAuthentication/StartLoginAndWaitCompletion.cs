@@ -19,6 +19,7 @@ namespace Features.XChainAuthentication.States {
         [Output] public NodePort success;
         [Output] public NodePort cancelled;
 
+
         protected override void Enter() {
             CheckForCancellation().Forget();
             StartLogin().Forget();
@@ -26,17 +27,21 @@ namespace Features.XChainAuthentication.States {
 
         public async UniTask StartLogin() {
             webView = (new GameObject("WebViewObject")).AddComponent<WebViewObject>();
-            webView.Init(ua: userAgent, cb: async (msg) => {
-                var jsonObject = JsonUtility.FromJson<EventData>(msg);
-                Debug.Log($"{jsonObject.eventData.accessToken} {jsonObject.eventData.accessKey}");
-                XChain.Instance.Context.SessionContext.AccessToken = jsonObject.eventData.accessToken;
-                XChain.Instance.Context.Web3Context.AccessKey = jsonObject.eventData.accessKey;
-                webView.EvaluateJS($"localStorage.removeItem('{keyName}')");
-                await FetchUserDetails();
-            });
-
+            webView.Init(ua: userAgent, cb: OnMessageRecieved);
             webView.SetVisibility(true);
             await LoadWebContent(url);
+        }
+
+        string receivedAuthToken;
+        string receivedAccessKey;
+
+        public async void OnMessageRecieved(string msg){
+                var jsonObject = JsonUtility.FromJson<EventData>(msg);
+                Debug.Log($"{jsonObject.eventData.accessToken} {jsonObject.eventData.accessKey}");
+                receivedAuthToken= jsonObject.eventData.accessToken;
+                receivedAccessKey = jsonObject.eventData.accessKey;
+                webView.EvaluateJS($"localStorage.removeItem('{keyName}')");
+                await FetchUserDetails();
         }
 
         public async UniTask CheckForCancellation(){
@@ -48,9 +53,12 @@ namespace Features.XChainAuthentication.States {
         public async UniTask FetchUserDetails(){
             var response = await XChain.Instance.APIService.GetUserDetails(XChain.Instance.Context.SessionContext.AccessToken);
             if(response.IsSuccess){
-                XChain.Instance.Context.Web3Context.UserData = response.SuccessResponse;
-                //Fetching users XToken balance at the time of the login
-                await XChain.FetchXTokenBalance();
+                var userData = response.SuccessResponse;
+
+                await XChain.Instance.Login(accessToken: receivedAuthToken,
+                    accessKey: receivedAccessKey,
+                    userData: userData);
+
                 ExitThroughNodePort("success");
             }
             else{

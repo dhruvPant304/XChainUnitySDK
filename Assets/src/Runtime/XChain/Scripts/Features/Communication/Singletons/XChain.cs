@@ -71,6 +71,14 @@ namespace Features.Communication.Singletons
             }
         }
 
+        public async UniTask Login(string accessToken, string accessKey, UserDetails userData){
+            Context.SessionContext.AccessToken = accessToken;
+            Context.Web3Context.AccessKey = accessKey;
+            Context.Web3Context.UserData = userData;
+            
+            await FetchXTokenBalance();
+        }
+
         #region Data
 
         public XChainContext Context = new();
