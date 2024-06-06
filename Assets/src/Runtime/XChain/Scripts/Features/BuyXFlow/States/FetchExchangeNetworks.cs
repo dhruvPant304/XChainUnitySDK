@@ -1,5 +1,4 @@
 using System.Linq;
-using Features.BuyXFlow.UIControllers;
 using Features.Communication.Singletons;
 using UnityEngine;
 using XNode;
@@ -16,7 +15,6 @@ namespace Features.BuyXFlow.States{
             if (response != null && response.IsSuccess) {
                 Debug.Log(response.SuccessResponse.ToList());
                 XChain.Instance.Context.BuyXContext.exchangeNetworks = response.SuccessResponse.ToList();
-                XChainCanvas.Instance.OpenBuyXView();
                 ExitThroughNodePort("exit");
             } 
         }
