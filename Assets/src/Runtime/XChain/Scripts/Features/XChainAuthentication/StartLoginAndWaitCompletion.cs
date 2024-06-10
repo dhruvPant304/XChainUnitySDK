@@ -76,15 +76,17 @@ namespace Features.XChainAuthentication.States {
 
         async UniTask LoadWebContent(string url) {
             using (UnityWebRequest webRequest = UnityWebRequest.Get(url)) {
-                await webRequest.SendWebRequest();
-                if (webRequest.result == UnityWebRequest.Result.Success)
-                {
-                    if(!TryLoadURL(url)) ExitThroughNodePort("failed");
+                try{
+                    await webRequest.SendWebRequest();
+                    if (webRequest.result == UnityWebRequest.Result.Success) {
+                        if(TryLoadURL(url)) return;
+                    }
                 }
-                else {
-                    Debug.LogError("Error loading webUrl: " + webRequest.error);
-                    ExitThroughNodePort("failed");
+                catch{
+                    //do nothing
                 }
+                Debug.LogError("Error loading webUrl: " + webRequest.error);
+                ExitThroughNodePort("failed");
             }
         }
 
