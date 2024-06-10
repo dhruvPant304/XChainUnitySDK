@@ -69,6 +69,7 @@ namespace Features.XChainAuthentication.States {
         }
 
         protected override void Exit() {
+            Debug.Log("Exitting webview");
             webView.SetVisibility(false);
             Destroy(webView.gameObject);
         }
