@@ -1,6 +1,8 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Data;
 using Features.Communication.Singletons;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 using XNode;
@@ -73,13 +75,25 @@ namespace Features.XChainAuthentication.States {
         async UniTask LoadWebContent(string url) {
             using (UnityWebRequest webRequest = UnityWebRequest.Get(url)) {
                 await webRequest.SendWebRequest();
-                if (webRequest.result == UnityWebRequest.Result.Success) {
-                   webView.LoadURL(url);
+                if (webRequest.result == UnityWebRequest.Result.Success)
+                {
+                    if(!TryLoadURL(url)) ExitThroughNodePort("failed");
                 }
                 else {
                     Debug.LogError("Error loading webUrl: " + webRequest.error);
                     ExitThroughNodePort("failed");
                 }
+            }
+        }
+
+        private bool TryLoadURL(string url) {
+            try{
+                webView.LoadURL(url);
+                return true;
+            }
+            catch (Exception ex) {
+                Debug.Log(ex);
+                return false;
             }
         }
 
