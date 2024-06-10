@@ -57,18 +57,20 @@ namespace Features.XChainAuthentication.States {
             if(response.IsSuccess){
                 var userData = response.SuccessResponse;
 
-                await XChain.Instance.Login(accessToken: receivedAuthToken,
+                var result = await XChain.Instance.Login(accessToken: receivedAuthToken,
                     accessKey: receivedAccessKey,
                     userData: userData);
 
-                ExitThroughNodePort("success");
+                if(result){
+                    ExitThroughNodePort("success");
+                    return;
+                }
             }
-            else{
-                ExitThroughNodePort("failed");
-            }
+            ExitThroughNodePort("failed");
         }
 
         protected override void Exit() {
+            webView.SetVisibility(false);
             Destroy(webView.gameObject);
         }
 

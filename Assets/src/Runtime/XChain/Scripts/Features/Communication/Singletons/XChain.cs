@@ -71,12 +71,12 @@ namespace Features.Communication.Singletons
             }
         }
 
-        public async UniTask Login(string accessToken, string accessKey, UserDetails userData){
+        public async UniTask<bool> Login(string accessToken, string accessKey, UserDetails userData){
             Context.SessionContext.AccessToken = accessToken;
             Context.Web3Context.AccessKey = accessKey;
             Context.Web3Context.UserData = userData;
             
-            await FetchXTokenBalance();
+            return await FetchXTokenBalance();
         }
 
         #region Data
@@ -287,7 +287,7 @@ namespace Features.Communication.Singletons
         /// Fetch X token Balance for the user from server, ensure that the method
         /// is called after login 
         /// </summary>
-        public static async UniTask FetchXTokenBalance(){
+        public static async UniTask<bool> FetchXTokenBalance(){
             var xChainNetwork = GetExchangeNetworkByName("x-chain");
             var authToken = XChain.Instance.Context.SessionContext.AccessToken;
             var chainId = xChainNetwork.chainId;
@@ -297,6 +297,7 @@ namespace Features.Communication.Singletons
                 var successResponse = response.SuccessResponse;
                 Instance.XTokenBalance = successResponse.balance;
             }
+            return response.IsSuccess;
         }
         #endregion
 
