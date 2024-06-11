@@ -42,7 +42,7 @@ namespace Features.XChainAuthentication.States {
                 receivedAuthToken= jsonObject.eventData.accessToken;
                 receivedAccessKey = jsonObject.eventData.accessKey;
                 webView.EvaluateJS($"localStorage.removeItem('{keyName}')");
-                await FetchUserDetails();
+                await Login();
         }
 
         public async UniTask CheckForCancellation(){
@@ -51,8 +51,8 @@ namespace Features.XChainAuthentication.States {
             ExitThroughNodePort("cancelled");
         }
 
-        public async UniTask FetchUserDetails(){
-            var response = await XChain.Instance.APIService.GetUserDetails(XChain.Instance.Context.SessionContext.AccessToken);
+        public async UniTask Login(){
+            var response = await XChain.Instance.APIService.GetUserDetails(receivedAuthToken);
             if(response.IsSuccess){
                 var userData = response.SuccessResponse;
 
