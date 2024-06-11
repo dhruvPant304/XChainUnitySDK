@@ -4851,6 +4851,7 @@ MonoBehaviour:
   currencyDropdown: {fileID: 5526103685169015775}
   currencyText: {fileID: 5526103685207332359}
   balanceText: {fileID: 5526103683952209905}
+  xTokenBalanceText: {fileID: 5526103683626897316}
   conversionRateText: {fileID: 5526103683958557190}
   xTokenInputField: {fileID: 5526103685202453030}
   currencyInputField: {fileID: 5526103684975463832}
