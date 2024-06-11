@@ -72,6 +72,9 @@ namespace Features.BuyXFlow.UIControllers
             await FetchExchangeRateAsync(_chainId, _tokenUUID);
             CalculateCurrency(float.Parse(xTokenInputField.text));
             SetEventListeners();
+
+            //fetching XToken Balance on initialization to update balance text
+            await XChain.FetchXTokenBalance();
             _initialized = true;
         }
 
