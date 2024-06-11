@@ -81,6 +81,7 @@ namespace Features.BuyXFlow.UIControllers
             currencyDropdown.onValueChanged.AddListener(OnCurrencyDropdownChange);
             xTokenInputField.onValueChanged.AddListener(OnXTokenValueChanged);
             currencyInputField.onValueChanged.AddListener(OnCurrencyValueChanged);
+            XChain.Instance.OnXTokenBalanceChanged += OnXTokenBalanceUpdate;
         }
 
         private void OnXTokenValueChanged(string newValue) {
@@ -225,7 +226,6 @@ namespace Features.BuyXFlow.UIControllers
             if (response.IsSuccess)
             {
                 Debug.Log(response.SuccessResponse);
-                XChain.Instance.OnXTokenBalanceChanged += OnXTokenBalanceUpdate;
             }
             else
             {
@@ -235,8 +235,8 @@ namespace Features.BuyXFlow.UIControllers
 
         private void OnXTokenBalanceUpdate(float balance){
             var balanceRound = Mathf.FloorToInt(balance);
-            xTokenBalanceText.text = $"{balanceRound} XTK";
-    }
+            xTokenBalanceText.text = $"Balance: {balanceRound} XTK";
+        }
 
         public async void GetWalletAddress() {
             await GetPlayerToken();
