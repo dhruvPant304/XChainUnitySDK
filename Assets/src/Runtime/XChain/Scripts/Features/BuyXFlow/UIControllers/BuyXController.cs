@@ -229,6 +229,7 @@ namespace Features.BuyXFlow.UIControllers
             if (response.IsSuccess)
             {
                 Debug.Log(response.SuccessResponse);
+                await XChain.FetchXTokenBalance();
             }
             else
             {
