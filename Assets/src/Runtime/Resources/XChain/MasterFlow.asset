@@ -148,9 +148,6 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: exit
-        node: {fileID: 2948070904705380869}
-        reroutePoints: []
-      - fieldName: exit
         node: {fileID: 975719276007110586}
         reroutePoints: []
       _direction: 0
@@ -611,7 +608,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: enter
-        node: {fileID: -5747056488559689504}
+        node: {fileID: 2996797544666967562}
         reroutePoints:
         - {x: 199.71645, y: -647.96094}
         - {x: -268.28357, y: -747.96094}
@@ -676,6 +673,9 @@ MonoBehaviour:
       connections:
       - fieldName: Branch_0
         node: {fileID: -5747056488559689504}
+        reroutePoints: []
+      - fieldName: exit
+        node: {fileID: 2948070904705380869}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
