@@ -19,6 +19,7 @@ namespace Features.BuyXFlow.UIControllers
         [SerializeField] TMP_Dropdown currencyDropdown;
         [SerializeField] TextMeshProUGUI currencyText;
         [SerializeField] TextMeshProUGUI balanceText;
+        [SerializeField] TextMeshProUGUI xTokenBalanceText;
         [SerializeField] TextMeshProUGUI conversionRateText;
         [SerializeField] TMP_InputField xTokenInputField;
         [SerializeField] TMP_InputField currencyInputField;
@@ -224,12 +225,18 @@ namespace Features.BuyXFlow.UIControllers
             if (response.IsSuccess)
             {
                 Debug.Log(response.SuccessResponse);
+                XChain.Instance.OnXTokenBalanceChanged += OnXTokenBalanceUpdate;
             }
             else
             {
                 Debug.Log($"BuyXToken Failed: {response.FailureResponse.message}");
             }
         }
+
+        private void OnXTokenBalanceUpdate(float balance){
+            var balanceRound = Mathf.FloorToInt(balance);
+            xTokenBalanceText.text = $"{balanceRound} XTK";
+    }
 
         public async void GetWalletAddress() {
             await GetPlayerToken();
